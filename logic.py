@@ -8,8 +8,8 @@ class Logic(QMainWindow, Ui_VotingApp):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.Seb_vote = 0
-        self.Beau_vote = 0
+        self.__Seb_vote = 0
+        self.__Beau_vote = 0
 
         self.Submit_Vote.clicked.connect(lambda: self.submit())
         self.Results.clicked.connect(lambda: self.results())
@@ -80,16 +80,16 @@ class Logic(QMainWindow, Ui_VotingApp):
             csv_reader = csv.reader(csv_file)
             for line in csv_reader:
                 if line[1] == 'Sebastian':
-                    self.Seb_vote += 1
+                    self.__Seb_vote += 1
                 else:
-                    self.Beau_vote += 1
+                    self.__Beau_vote += 1
 
     def results(self) -> None:
         """
         Gets voting results and finds the winner
         """
         self.vote_count()
-        if self.Seb_vote > self.Beau_vote:
-            self.label.setText(f'Sebastian wins with {self.Seb_vote} votes.')
+        if self.__Seb_vote > self.__Beau_vote:
+            self.label.setText(f'Sebastian wins with {self.__Seb_vote} votes.')
         else:
-            self.label.setText(f'Beau wins with {self.Beau_vote} votes.')
+            self.label.setText(f'Beau wins with {self.__Beau_vote} votes.')
